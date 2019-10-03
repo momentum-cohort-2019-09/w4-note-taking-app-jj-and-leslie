@@ -20,6 +20,7 @@
         </div>
     </div>
     <form id="login-form"method="POST">
+    <form action="." method="post" id="login-form">
         <div id="login-error"></div>
         <div>
             <label for="uname"><b>Username</b></label>
@@ -28,8 +29,8 @@
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required>
         
-            <button type="submit">Login</button>
-            <button type="submit">Create Account</button>
+            <button id="submit-login" type="submit">Login</button>
+            <button id="create-account" type="submit">Create Account</button>
             <a href>Add Note</a>
         </div>
     </form>
