@@ -5,19 +5,23 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta http-equip="X-UA-Compatible" content="ie-edge">
     <title>Notepad</title>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
     <script src="main.js" defer></script>
     <style>
     .hidden {
         display:none;
+    }
+    .note {
+        border: 1px solid black;
+        margin: 3px 0;
+        padding: 5px;
     }
     </style>
 </head>
 <body>
     <div class="container">
             <h1>Notepad</h1>
-        <div id="notes">
-
-        </div>
+        <div id="notes"></div>
     </div>
     <form id="login-form"method="POST">
     <form action="." method="post" id="login-form">
@@ -28,12 +32,10 @@
         
             <label  for="psw"><b>Password</b></label>
             <input id="psw" type="password" placeholder="Enter Password" name="psw" required>
-
-            <input id="login" type="submit" value="login">            
             <input id="create-account" type="submit" value="create login">
-                        
+
             </button>
-            <a href>Add Note</a>
+            <!-- <a href>Add Note</a> -->
         </div>
     </form>
 </body>
