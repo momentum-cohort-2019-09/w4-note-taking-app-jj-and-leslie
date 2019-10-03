@@ -4,44 +4,6 @@ const uuidv4 = require('uuid/v4')
 const baseApiUrl = 'https://notes-api.glitch.me/api'
 
 
-// const app = {
-//     data: {
-//         credentials: {
-//             username: sessionStorage.getItem('username'),
-//             password: sessionStorage.getItem('password')
-//         }
-//     },
-
-//     setCredentials: function(username, password) {
-//         this.data.credentials = {
-//             username: username,
-//             password: password
-//         }
-//         sessionStorage.setItem('username', username)
-//         sessionStorage.setItem('password', password)
-//     },
-
-//     createUser: function (username, password) {
-//         fetch('${baseApiUrl}/users', {
-//             headers: {
-//                 Method: 'POST',
-//                 body: JSON.stringify({'username': username, 'password': password}),
-//                 'Content-Type': 'application/json'
-//             }
-//         })
-//             .then(response => {
-//                 if (response.ok){
-//                     this.setCredentials(username, password)
-//                 } else {
-//                     document.getElementById('login-error').innerText= 'There has been an error'
-//                 }
-//             })
-//     }
-// } 
-
-
-
-
 let credentials = {
     username: sessionStorage.getItem('username'),
     password: sessionStorage.getItem('password')
