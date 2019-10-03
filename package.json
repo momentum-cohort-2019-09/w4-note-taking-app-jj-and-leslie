@@ -5,5 +5,10 @@
   },
   "scripts": {
     "start": "parcel serve index.html"
+  },
+  "dependencies": {
+    "basic-auth": "^2.0.1",
+    "require": "^2.4.20",
+    "uuidv4": "^5.0.1"
   }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1.0">
     <meta http-equip="X-UA-Compatible" content="ie-edge">
     <title>Notepad</title>
     <script src="main.js" defer></script>
@@ -24,13 +24,15 @@
         <div id="login-error"></div>
         <div>
             <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <input id="uname" type="text" placeholder="Enter Username" name="uname" required>
         
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-        
-            <button id="submit-login" type="submit">Login</button>
-            <button id="create-account" type="submit">Create Account</button>
+            <label  for="psw"><b>Password</b></label>
+            <input id="psw" type="password" placeholder="Enter Password" name="psw" required>
+
+            <input id="login" type="submit" value="login">            
+            <input id="create-account" type="submit" value="create login">
+                        
+            </button>
             <a href>Add Note</a>
         </div>
     </form>
