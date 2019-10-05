@@ -87,6 +87,14 @@ function renderNotes () {
         document.getElementById('notes').innerHTML = data.notes.map(renderNote).join('\n')
         let editables = document.querySelectorAll('[contenteditable]');
         for(let editable of editables){
+            if(!editable.classList.contains("note-text")){
+                editable.addEventListener('keydown', function(evt){
+                    if (evt.code === "Enter"){
+                        evt.preventDefault()
+                        return evt.code = "Tab"
+                    }
+                })
+            }
             editable.addEventListener('focusout', function(event) {
                 let note = event.target.closest(".note")
                 let body = prepareBody(note)
