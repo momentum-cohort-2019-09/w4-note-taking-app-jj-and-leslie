@@ -1,6 +1,5 @@
 /*globals fetch, FormData, btoa, sessionStorage */
 
-const uuidv4 = require('uuid/v4')
 const baseApiUrl = 'https://notes-api.glitch.me/api'
 
 
@@ -14,14 +13,15 @@ function basicAuthCreds(username, password) {
 }
 
 function main(){
+    // render page so that the show/hide functionality is properly expressed.
     renderPage()
-
     const loginForm = document.querySelector('#login-form')
     loginForm.addEventListener('submit', function(evt){
         evt.preventDefault()
         const formData = new FormData(loginForm)
         const username = formData.get('uname')
         const password = formData.get('psw')  
+        //validate that credentials are correct
         fetch(`${baseApiUrl}/notes`, {
             headers: {
                 'Authorization': basicAuthCreds(username, password)
@@ -62,6 +62,7 @@ function main(){
         .then(response=> {
             if (response.ok){
                 renderPage()
+                addNoteForm.reset()
             } else {
                 document.getElementById('add-note-error').innerText = 'something went wrong'
             }
