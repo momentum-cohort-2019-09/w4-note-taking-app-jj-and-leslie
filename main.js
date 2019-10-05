@@ -1,5 +1,6 @@
 /*globals fetch, FormData, btoa, sessionStorage */
 
+import moment from 'moment'
 const baseApiUrl = 'https://notes-api.glitch.me/api'
 
 
@@ -89,9 +90,9 @@ function renderNotes () {
         for(let editable of editables){
             if(!editable.classList.contains("note-text")){
                 editable.addEventListener('keydown', function(evt){
-                    if (evt.code === "Enter"){
+                    if (evt.code === 'Enter'){
                         evt.preventDefault()
-                        return evt.code = "Tab"
+                        return evt.code = 'Tab'
                     }
                 })
             }
@@ -133,11 +134,12 @@ function updateNote(id, body) {
 }
 
 function renderNote(note){
+    let newDate = note.updated
     return `<div class="note" id=${note._id}>
         <h2 class='note-title' contenteditable="true">${note.title}</h2>
         <p class='note-text' contenteditable="true">${note.text}</p>
         <p> Tags: <span class='note-tags'contenteditable="true">${note.tags || 'None'}</span></p>
-        <p>Date: ${note.updated}</p>
+        <p>Date: ${moment(newDate).format('LLLL')}</p>
         </div>
     ` 
 }
