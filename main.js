@@ -40,6 +40,10 @@ function main(){
         })
     })
     // TO DO: Add Event listener and functionality for delete note
+    //  1. add delete button or link to  each notecard.
+    // 2. add eventlistener for that link or button.
+    // 3. eventlistener should get note _id and call delete api endpoint 
+    // 4. if api endpoint returns response.ok add js to remove notecard from the DOM 
 
     // TO DO: Add Event listener and functionality for add note
 
@@ -69,7 +73,7 @@ function renderNotes () {
 }
 
 function renderNote(note){
-    return `<div class="note">
+    return `<div class="note" id=${note._id}>
         <h2>${note.title}</h2>
         <p>${note.text}</p>
         <p>Tags: ${note.tags || 'None'}</p>
