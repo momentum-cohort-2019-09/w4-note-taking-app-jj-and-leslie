@@ -44,13 +44,30 @@ function main(){
     // 2. add eventlistener for that link or button.
     // 3. eventlistener should get note _id and call delete api endpoint 
     // 4. if api endpoint returns response.ok add js to remove notecard from the DOM 
+    const addNoteForm = document.querySelector('#add-note-form')
+    addNoteForm.addEventListener('submit', function(evt){
+        evt.preventDefault()
+        const title = addNoteForm.querySelector('#title').value
+        const text = addNoteForm.querySelector('#text').value 
+        const tags = addNoteForm.querySelector('#tags').value.split(',')  
 
-    // TO DO: Add Event listener and functionality for add note
-
-    // TO DO: Add Event listener and functionality for update note
-
+        fetch(`${baseApiUrl}/notes`, {
+            method: 'POST',
+            body: JSON.stringify({'title': title, 'text': text, 'tags': tags}),
+            headers: {
+                'Authorization': basicAuthCreds(credentials.username, credentials.password),
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response=> {
+            if (response.ok){
+                renderPage()
+            } else {
+                document.getElementById('add-note-error').innerText = 'something went wrong'
+            }
+        })
+    })
 }
-
 
 function renderNotes () {
     fetch(`${baseApiUrl}/notes`, {
@@ -66,17 +83,51 @@ function renderNotes () {
         }
     })
     .then(data =>{
-        console.log(data)
         document.getElementById('notes').innerHTML = data.notes.map(renderNote).join('\n')
-        console.log(data.notes.map(renderNote).join('\n'))
+        let editables = document.querySelectorAll('[contenteditable]');
+        for(let editable of editables){
+            editable.addEventListener('focusout', function(event) {
+                let note = event.target.closest(".note")
+                let body = prepareBody(note)
+                updateNote(note.id, body)
+            })
+        }
+        
     })
+}
+
+function prepareBody(note) {
+    return { 
+        'title': note.querySelector('.note-title').innerHTML,
+        'text': note.querySelector('.note-text').innerHTML,
+        'tags': note.querySelector('.note-tags').innerHTML.split(',')
+    }
+}
+
+function updateNote(id, body) {
+    fetch(`${baseApiUrl}/notes/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: {
+            'Authorization': basicAuthCreds(credentials.username, credentials.password),
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response=> {
+        if (response.ok){
+            renderPage()
+        } else {
+            document.getElementById('add-note-error').innerText = 'something went wrong'
+        }
+    })
+
 }
 
 function renderNote(note){
     return `<div class="note" id=${note._id}>
-        <h2>${note.title}</h2>
-        <p>${note.text}</p>
-        <p>Tags: ${note.tags || 'None'}</p>
+        <h2 class='note-title' contenteditable="true">${note.title}</h2>
+        <p class='note-text' contenteditable="true">${note.text}</p>
+        <p> Tags: <span class='note-tags'contenteditable="true">${note.tags || 'None'}</span></p>
         <p>Date: ${note.updated}</p>
         </div>
     ` 
@@ -85,12 +136,12 @@ function renderNote(note){
 
 function showLoginForm(){
     document.getElementById('login-form').classList.remove('hidden')
-    document.getElementById('notes').classList.add('hidden')
+    document.getElementById('notes-container').classList.add('hidden')
 }
 
 function hideLoginForm () {
     document.getElementById('login-form').classList.add('hidden')
-    document.getElementById('notes').classList.remove('hidden')
+    document.getElementById('notes-container').classList.remove('hidden')
 }
 
 

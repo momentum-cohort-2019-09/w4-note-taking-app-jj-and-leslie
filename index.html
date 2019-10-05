@@ -20,11 +20,26 @@
 </head>
 <body>
     <div class="container">
-            <h1>Notepad</h1>
-    <div id="notes"></div>
+        <h1>Notepad</h1>
+        <div id="notes-container">
+            <div id="notes"> </div>
+            <form action="." id="add-note-form">
+                <div id="add-note-error"></div>
+                <div>
+                    <label for="title"><b>Title</b></label>
+                    <input id="title" type="text" placeholder="Enter Title" name="title">
+                
+                    <label  for="text"><b>Text</b></label>
+                    <textarea id="text" rows="4" cols="50" required></textarea>
+                    <label for="tags"><b>Tags</b></label>
+                    <input id="tags" type="text" placeholder="ex: Fitness, ToDo" name="tag">
+                    <input id="add-note" type="submit" value="Add Note">
+                </div>
+            </form>
+        </div>
     </div>
 
-    <form action="." method="post" id="login-form">
+    <form action="." id="login-form">
         <div id="login-error"></div>
         <div>
             <label for="uname"><b>Username</b></label>
@@ -33,9 +48,6 @@
             <label  for="psw"><b>Password</b></label>
             <input id="psw" type="password" placeholder="Enter Password" name="psw" required>
             <input id="login" type="submit" value="login">
-            <button type="submit">
-            </button>
-            <!-- <a href>Add Note</a> -->
         </div>
     </form>
 </body>
