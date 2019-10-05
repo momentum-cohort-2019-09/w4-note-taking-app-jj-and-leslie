@@ -39,6 +39,12 @@ function main(){
             }
         })
     })
+    // TO DO: Add Event listener and functionality for delete note
+
+    // TO DO: Add Event listener and functionality for add note
+
+    // TO DO: Add Event listener and functionality for update note
+
 }
 
 
