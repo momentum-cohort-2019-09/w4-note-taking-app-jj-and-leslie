@@ -64,10 +64,10 @@ function renderNotes () {
 
 function renderNote(note){
     return `<div class="note">
-        <p>${note.title}</p>
+        <h2>${note.title}</h2>
         <p>${note.text}</p>
-        <p>${note.tags}</p>
-        <p>${note.updated}</p>
+        <p>Tags: ${note.tags || 'None'}</p>
+        <p>Date: ${note.updated}</p>
         </div>
     ` 
 }
