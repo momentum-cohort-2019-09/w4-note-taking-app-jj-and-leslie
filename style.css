@@ -32,3 +32,7 @@ body {
     padding: 5px;
 } 
 
+.delete {
+    float: right;
+    margin: -15px  5px;
+}

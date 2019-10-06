@@ -101,7 +101,26 @@ function renderNotes () {
                 updateNote(note.id, body)
             })
         }
-        
+        const deleteFromNotes = document.querySelectorAll('.delete')
+        for (let deleteNote of deleteFromNotes){
+            deleteNote.addEventListener('click', function(event) {
+                event.preventDefault()
+                let note = event.target.closest(".note")
+                fetch(`${baseApiUrl}/notes/${note.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': basicAuthCreds(credentials.username, credentials.password)
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        renderPage()
+                    } else {
+                        document.getElementById('login-error').innerText = 'something went wrong'
+                    }
+                })
+            })
+        }
     })
 }
 
@@ -132,27 +151,6 @@ function updateNote(id, body) {
 
 }
 
-const deleteFromNotes = document.querySelectorAll('notes.delete')
-deleteFromNotes.addEventListener('click', function(event) {
-        event.preventDefault()
-        let note = event.target.closest(".note")
-        fetch(`${baseApiUrl}/notes/${note.id}`, {
-            method: 'DELETE',
-            body: JSON.stringify(body),
-            headers: {
-                'Authorization': basicAuthCreds(credentials.username, credentials.password)
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                renderPage()
-            } else {
-                document.getElementById('login-error').innerText = 'something went wrong'
-            }
-            // let elementGone = document.getElementsByClassName('note');
-            // elementGone.parentNode.removeChild('note');
-        })
-    })
 
 function renderNote(note){
     let newDate = note.updated
@@ -161,9 +159,7 @@ function renderNote(note){
         <p class='note-text' contenteditable="true">${note.text}</p>
         <p> Tags: <span class='note-tags'contenteditable="true">${note.tags || 'None'}</span></p>
         <p>Date: ${moment(newDate).format('LLLL')}</p>
-        <button class="delete">Delete
-            <i class="fas fa-trash-alt"></i>
-        </button>
+        <i class="delete fa fa-trash"></i>
         </div>
     ` 
 }

@@ -17,13 +17,17 @@
             <form action="." id="add-note-form">
                 <div id="add-note-error"></div>
                 <div id="add-note">
-                    <label for="title"><b>Title</b></label>
-                    <input id="title" type="text" placeholder="Enter Title" name="title">
-                
-                    <label  for="text"><b>Text</b></label>
-                    <textarea id="text" rows="4" cols="50" required></textarea>
-                    <label for="tags"><b>Tags</b></label>
-                    <input id="tags" type="text" placeholder="ex: Fitness, ToDo" name="tag">
+                    <div>
+                        <input id="title" type="text" placeholder="Enter Title" name="title">
+                    </div>
+                    <div>
+                        <textarea id="text" rows="4" cols="50" required></textarea>
+                    </div>
+                    <div>
+                        <label for="tags"><b>Tags</b></label>
+                        <input id="tags" type="text" placeholder="ex: Fitness, ToDo" name="tag">
+                    </div>
+                    
                     <input id="add-note" type="submit" value="Add Note">
                 </div>
             </form>
