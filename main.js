@@ -132,16 +132,25 @@ function updateNote(id, body) {
 
 }
 
-const deleteFromNotes = document.querySelector('#delete')
-deleteFromNotes.addEventListener('submit', function(event) {
+const deleteFromNotes = document.querySelectorAll('notes.delete')
+deleteFromNotes.addEventListener('click', function(event) {
         event.preventDefault()
-        fetch(`${baseApiUrl}/notes/${id}`, {
+        let note = event.target.closest(".note")
+        fetch(`${baseApiUrl}/notes/${note.id}`, {
             method: 'DELETE',
             body: JSON.stringify(body),
+            headers: {
+                'Authorization': basicAuthCreds(credentials.username, credentials.password)
+            }
         })
         .then(response => {
-            let elementGone = document.getElementsByClassName('note');
-            elementGone.parentNode.removeChild('note');
+            if (response.ok) {
+                renderPage()
+            } else {
+                document.getElementById('login-error').innerText = 'something went wrong'
+            }
+            // let elementGone = document.getElementsByClassName('note');
+            // elementGone.parentNode.removeChild('note');
         })
     })
 
@@ -152,8 +161,9 @@ function renderNote(note){
         <p class='note-text' contenteditable="true">${note.text}</p>
         <p> Tags: <span class='note-tags'contenteditable="true">${note.tags || 'None'}</span></p>
         <p>Date: ${moment(newDate).format('LLLL')}</p>
-        <button id="update">Update</button>
-        <button id="delete">Delete</button>
+        <button class="delete">Delete
+            <i class="fas fa-trash-alt"></i>
+        </button>
         </div>
     ` 
 }
