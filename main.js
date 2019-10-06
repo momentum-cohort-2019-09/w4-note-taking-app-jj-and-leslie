@@ -132,6 +132,19 @@ function updateNote(id, body) {
 
 }
 
+const deleteFromNotes = document.querySelector('#delete')
+deleteFromNotes.addEventListener('submit', function(event) {
+        event.preventDefault()
+        fetch(`${baseApiUrl}/notes/${id}`, {
+            method: 'DELETE',
+            body: JSON.stringify(body),
+        })
+        .then(response => {
+            let elementGone = document.getElementsByClassName('note');
+            elementGone.parentNode.removeChild('note');
+        })
+    })
+
 function renderNote(note){
     let newDate = note.updated
     return `<div class="note" id=${note._id}>
@@ -139,6 +152,8 @@ function renderNote(note){
         <p class='note-text' contenteditable="true">${note.text}</p>
         <p> Tags: <span class='note-tags'contenteditable="true">${note.tags || 'None'}</span></p>
         <p>Date: ${moment(newDate).format('LLLL')}</p>
+        <button id="update">Update</button>
+        <button id="delete">Delete</button>
         </div>
     ` 
 }
