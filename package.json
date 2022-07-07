@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "basic-auth": "^2.0.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "require": "^2.4.20",
     "uuidv4": "^5.0.1"
   }
